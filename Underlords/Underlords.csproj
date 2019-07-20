@@ -45,6 +45,7 @@
     <Compile Include="Models\Heros\Hero.cs" />
       <Compile Include="Models\Heros\Razor.cs"/>
       <Compile Include="Models\Underlords\Assassin.cs"/>
+      <Compile Include="Models\Underlords\BloodBound.cs"/>
       <Compile Include="Models\Underlords\Underlord.cs"/>
     <Compile Include="Models\Skills\Skill.cs" />
     <Compile Include="Program.cs" />

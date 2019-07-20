@@ -4,16 +4,15 @@ namespace Underlords.Model.Races
 {
     public class Assassin : Underlord
     {
-        public Assassin(int count)
+        public Assassin()
         {
             Name = GetType().Name;
             Description = "Get Critical Hit";
             LevelUpdateNumber = 3;
-            Level = count / LevelUpdateNumber;
-            Effect = GetAssassinEffect(Level)
+//            Level = count / LevelUpdateNumber;
         }
 
-        private object GetAssassinEffect(int level)
+        protected override object GetEffect(int level)
         {
             switch (level)
             {
