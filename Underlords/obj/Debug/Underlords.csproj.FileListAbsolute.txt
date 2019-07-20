@@ -1,0 +1,6 @@
+E:\Source\Repo\DotaUnderlords\Underlords\bin\Debug\Underlords.exe
+E:\Source\Repo\DotaUnderlords\Underlords\bin\Debug\Underlords.pdb
+E:\Source\Repo\DotaUnderlords\Underlords\obj\Debug\Underlords.csprojAssemblyReference.cache
+E:\Source\Repo\DotaUnderlords\Underlords\obj\Debug\Underlords.csproj.CoreCompileInputs.cache
+E:\Source\Repo\DotaUnderlords\Underlords\obj\Debug\Underlords.exe
+E:\Source\Repo\DotaUnderlords\Underlords\obj\Debug\Underlords.pdb
