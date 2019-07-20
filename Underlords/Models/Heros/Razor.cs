@@ -6,7 +6,7 @@ namespace Underlords.Model
 {
     public class Razor : Hero
     {
-        public Razor()
+        public Razor(int currentLevel) : base(currentLevel)
         {
             Cost = 1;
             Underlords = new List<Underlord> {new Primordial(), new Mage()};

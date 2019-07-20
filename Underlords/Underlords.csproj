@@ -43,9 +43,11 @@
       <Compile Include="Models\Chess.cs"/>
       <Compile Include="Models\Creeps\Creep.cs"/>
       <Compile Include="Models\Heros\AntiMage.cs"/>
+      <Compile Include="Models\Heros\Bloodseeker.cs"/>
     <Compile Include="Models\Heros\Hero.cs" />
       <Compile Include="Models\Heros\Razor.cs"/>
       <Compile Include="Models\IChess.cs"/>
+      <Compile Include="Models\Skills\Bloodrage.cs"/>
       <Compile Include="Models\Skills\ISkill.cs"/>
       <Compile Include="Models\Skills\ManaBreak.cs"/>
       <Compile Include="Models\Underlords\Assassin.cs"/>

@@ -12,6 +12,7 @@ namespace Underlords.Model.Skills
         bool IsMagicDamage { get; set; }
         bool IsPhysicalDamage { get; set; }
         bool IsPureDamage { get; set; }
+        bool IsActive { get; set; }
         void Use(int level);
     }
 }
