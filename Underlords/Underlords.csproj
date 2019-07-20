@@ -38,9 +38,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+      <Compile Include="Models\ChessBoard\Position.cs"/>
+      <Compile Include="Models\Chess.cs"/>
+      <Compile Include="Models\Creeps\Creep.cs"/>
     <Compile Include="Models\Heros\Hero.cs" />
-    <Compile Include="Models\Jobs\Job.cs" />
-    <Compile Include="Models\Races\Race.cs" />
+      <Compile Include="Models\Underlords\Underlord.cs"/>
     <Compile Include="Models\Skills\Skill.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
