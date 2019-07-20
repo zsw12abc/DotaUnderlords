@@ -2,11 +2,11 @@ using System;
 
 namespace Underlords.Model.Races
 {
-    public class BloodBound : Underlord
+    public class Deadeye : Underlord
     {
-        public BloodBound()
+        public Deadeye()
         {
-            Description = "Get Bounce Damage after other BloodBound died";
+            Description = "Focus on lowest-health enemy";
             LevelUpdateNumber = 2;
         }
 
@@ -15,7 +15,7 @@ namespace Underlords.Model.Races
             switch (count / LevelUpdateNumber)
             {
                 case 1:
-                    //Get +100% Attack Damage
+                    //Focus on Lowest-health enemy
                     break;
             }
 

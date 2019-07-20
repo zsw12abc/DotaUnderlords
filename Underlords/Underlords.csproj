@@ -47,6 +47,10 @@
       <Compile Include="Models\Underlords\Assassin.cs"/>
       <Compile Include="Models\Underlords\BloodBound.cs"/>
       <Compile Include="Models\Underlords\Brawny.cs"/>
+      <Compile Include="Models\Underlords\Deadeye.cs"/>
+      <Compile Include="Models\Underlords\Demon.cs"/>
+      <Compile Include="Models\Underlords\DemonHunter.cs"/>
+      <Compile Include="Models\Underlords\IUnderlord.cs"/>
       <Compile Include="Models\Underlords\Underlord.cs"/>
     <Compile Include="Models\Skills\Skill.cs" />
     <Compile Include="Program.cs" />

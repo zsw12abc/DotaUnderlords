@@ -2,12 +2,12 @@ using System;
 
 namespace Underlords.Model.Races
 {
-    public class Brawny : Underlord
+    public class DemonHunter : Underlord
     {
-        public Brawny()
+        public DemonHunter()
         {
-            Description = "Increase Max Hp";
-            LevelUpdateNumber = 2;
+            Description = "Invalidate Opponent's Demon";
+            LevelUpdateNumber = 1;
         }
 
         public override object GetEffect(int count)
@@ -15,10 +15,10 @@ namespace Underlords.Model.Races
             switch (count / LevelUpdateNumber)
             {
                 case 1:
-                    //Update 200 Max HP
+                    //Invalidate opponent's Demon
                     break;
                 case 2:
-                    //Update 500 Max HP
+                    //Invalidate opponent's Demon. Demon Get +50% Pure Damage
                     break;
             }
 

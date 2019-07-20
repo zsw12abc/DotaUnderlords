@@ -2,12 +2,12 @@ using System;
 
 namespace Underlords.Model.Races
 {
-    public class BloodBound : Underlord
+    public class Demon : Underlord
     {
-        public BloodBound()
+        public Demon()
         {
-            Description = "Get Bounce Damage after other BloodBound died";
-            LevelUpdateNumber = 2;
+            Description = "Gain Pure Damage";
+            LevelUpdateNumber = 1;
         }
 
         public override object GetEffect(int count)
@@ -15,7 +15,7 @@ namespace Underlords.Model.Races
             switch (count / LevelUpdateNumber)
             {
                 case 1:
-                    //Get +100% Attack Damage
+                    //Get 50% Pure Damage
                     break;
             }
 
