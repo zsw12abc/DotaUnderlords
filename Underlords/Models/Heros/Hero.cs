@@ -5,12 +5,14 @@ using Underlords.Models;
 
 namespace Underlords.Model
 {
-    public class Hero : Chess
+    public abstract class Hero : Chess
     {
         public List<Skill> Skills { get; set; }
         public int CurrentLevel { get; set; }
         public int MaxLevel { get; set; } = 3;
         public int Cost { get; set; }
-        public List<Underlord> Underlord { get; set; }
+        public List<Underlord> Underlords { get; set; }
+
+        public abstract void UseSkill(int level);
     }
 }
