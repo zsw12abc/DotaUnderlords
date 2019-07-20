@@ -2,13 +2,12 @@ using System;
 
 namespace Underlords.Model.Races
 {
-    public class Assassin : Underlord
+    public class Savage : Underlord
     {
-        public Assassin()
+        public Savage()
         {
-            Description = "Get Critical Hit";
-            LevelUpdateNumber = 3;
-//            Level = count / LevelUpdateNumber;
+            Description = "Gain Attack Damage";
+            LevelUpdateNumber = 2;
         }
 
         public override object GetEffect(int count)
@@ -16,13 +15,13 @@ namespace Underlords.Model.Races
             switch (count / LevelUpdateNumber)
             {
                 case 1:
-                    //10% get 300% critical hit;
+                    //Gain +10% Attack Damage
                     break;
                 case 2:
-                    //20% get 400% critical hit;
+                    //Gain +25% Attack Damage
                     break;
                 case 3:
-                    //30% get 300% critical hit;
+                    //Gain +45% Attack Damage
                     break;
             }
 

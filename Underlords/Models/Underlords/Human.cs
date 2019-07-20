@@ -2,13 +2,12 @@ using System;
 
 namespace Underlords.Model.Races
 {
-    public class Assassin : Underlord
+    public class Human : Underlord
     {
-        public Assassin()
+        public Human()
         {
-            Description = "Get Critical Hit";
-            LevelUpdateNumber = 3;
-//            Level = count / LevelUpdateNumber;
+            Description = "Silence target";
+            LevelUpdateNumber = 2;
         }
 
         public override object GetEffect(int count)
@@ -16,13 +15,13 @@ namespace Underlords.Model.Races
             switch (count / LevelUpdateNumber)
             {
                 case 1:
-                    //10% get 300% critical hit;
+                    //20% Chance to Silence Target for 4s
                     break;
                 case 2:
-                    //20% get 400% critical hit;
+                    //44% Chance to Silence Target for 4s
                     break;
                 case 3:
-                    //30% get 300% critical hit;
+                    //66% Chance to Silence Target for 4s
                     break;
             }
 

@@ -17,7 +17,7 @@ namespace Underlords.Models
         public int MoveSpeed { get; set; }
         public Position Position { get; set; }
 
-        public float DodgeRate { get; set; }
+        public float Evasion { get; set; }
 
         public float AttackSpeed { get; set; }
         public int AttackDamage { get; set; }
