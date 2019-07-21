@@ -20,6 +20,6 @@ namespace Underlords.Model
         public int Cost { get; set; }
         public List<Underlord> Underlords { get; set; }
 
-        public abstract void UseSkill(int level);
+        public abstract void ReleaseSkill(Chess target);
     }
 }

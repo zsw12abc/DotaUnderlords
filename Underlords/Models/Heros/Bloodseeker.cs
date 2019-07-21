@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Underlords.Model.Races;
 using Underlords.Model.Skills;
+using Underlords.Models;
 
 namespace Underlords.Model
 {
@@ -18,7 +18,7 @@ namespace Underlords.Model
             MagicResistance = 20;
             Armor = 5;
             Underlords = new List<Underlord> {new Human(), new Assassin()};
-            Skills = new List<Skill> {new Bloodrage()};
+            Skills = new List<Skill> {new Bloodrage(currentLevel)};
             switch (currentLevel)
             {
                 case 1:
@@ -40,9 +40,9 @@ namespace Underlords.Model
             }
         }
 
-        public override void UseSkill(int level)
+        public override void ReleaseSkill(Chess target)
         {
-            throw new NotImplementedException();
+            new Bloodrage(CurrentLevel).Rage(this);
         }
     }
 }

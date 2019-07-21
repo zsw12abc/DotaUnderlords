@@ -42,9 +42,10 @@ namespace Underlords.Models
             throw new NotImplementedException();
         }
 
-        public virtual void Attack()
+        public virtual void Attack(Chess target)
         {
-            throw new NotImplementedException();
+            var random = new Random();
+            target.CurrentHP -= random.Next(MinAttackDamage, MaxAttackDamage);
         }
     }
 }

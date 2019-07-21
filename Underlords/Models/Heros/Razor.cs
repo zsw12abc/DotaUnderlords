@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Underlords.Model.Races;
+using Underlords.Models;
 
 namespace Underlords.Model
 {
@@ -12,7 +13,8 @@ namespace Underlords.Model
             Underlords = new List<Underlord> {new Primordial(), new Mage()};
         }
 
-        public override void UseSkill(int level)
+
+        public override void ReleaseSkill(Chess target)
         {
             throw new NotImplementedException();
         }

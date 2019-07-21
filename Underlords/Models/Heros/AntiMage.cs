@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Underlords.Model.Races;
 using Underlords.Model.Skills;
+using Underlords.Models;
 
 namespace Underlords.Model
 {
@@ -17,7 +18,7 @@ namespace Underlords.Model
             AttackRange = 1;
             MaxHP = 500 * currentLevel;
             MagicResistance = 10 * currentLevel;
-            Skills = new List<Skill> {new ManaBreak()};
+            Skills = new List<Skill> {new ManaBreak(CurrentLevel)};
             Underlords = new List<Underlord> {new DemonHunter(), new Elusive()};
             switch (currentLevel)
             {
@@ -39,16 +40,15 @@ namespace Underlords.Model
             }
         }
 
-        public override void Attack()
+        public override void Attack(Chess target)
         {
-            base.Attack();
-            UseSkill(CurrentLevel);
+            base.Attack(target);
+            ReleaseSkill(target);
         }
 
-
-        public override void UseSkill(int level)
+        public override void ReleaseSkill(Chess target)
         {
-            foreach (var skill in Skills) skill.Use(level);
+            new ManaBreak(CurrentLevel).BurnMana(target);
         }
     }
 }
