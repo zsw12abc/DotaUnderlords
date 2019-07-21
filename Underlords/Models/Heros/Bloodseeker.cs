@@ -40,9 +40,22 @@ namespace Underlords.Model
             }
         }
 
+        public override void Attack(Chess target)
+        {
+            base.Attack(target);
+            ReleaseSkill(target);
+        }
+
         public override void ReleaseSkill(Chess target)
         {
             new Bloodrage(CurrentLevel).Rage(this);
+            if (target.KilledBy == this)
+            {
+                if (CurrentHP >= 0.7 * MaxHP)
+                    CurrentHP = MaxHP;
+                else
+                    CurrentHP += 0.3 * MaxHP;
+            }
         }
     }
 }

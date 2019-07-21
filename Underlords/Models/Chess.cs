@@ -8,14 +8,16 @@ namespace Underlords.Models
         public Chess()
         {
             Name = GetType().Name;
+            CurrentMana = 0;
             IsRange = AttackRange > 1;
+            CurrentHP = MaxHP;
         }
 
         public Position Position { get; set; }
 
         public string Name { get; set; }
-        public int MaxHP { get; set; }
-        public int CurrentHP { get; set; }
+        public double MaxHP { get; set; }
+        public double CurrentHP { get; set; }
         public int HpRegSpeed { get; set; }
         public int MaxMana { get; set; }
         public int CurrentMana { get; set; }
@@ -36,6 +38,8 @@ namespace Underlords.Models
         public bool IsDisarmed { get; set; }
         public bool IsStunned { get; set; }
         public bool IsHexed { get; set; }
+        public bool IsDead { get; set; }
+        public Chess KilledBy { get; set; }
 
         public virtual void Move()
         {
@@ -45,7 +49,23 @@ namespace Underlords.Models
         public virtual void Attack(Chess target)
         {
             var random = new Random();
-            target.CurrentHP -= random.Next(MinAttackDamage, MaxAttackDamage);
+            var attackDamage = random.Next(MinAttackDamage, MaxAttackDamage);
+            if (target.CurrentHP <= attackDamage)
+                Kill(target);
+            else
+                target.CurrentHP -= attackDamage;
+        }
+
+        public virtual void Kill(Chess target)
+        {
+            target.IsDead = true;
+            target.KilledBy = target;
+        }
+
+        public void initialize()
+        {
+            CurrentHP = MaxHP;
+            IsRange = AttackRange > 1;
         }
     }
 }

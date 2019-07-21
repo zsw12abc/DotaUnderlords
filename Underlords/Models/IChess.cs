@@ -4,5 +4,6 @@ namespace Underlords.Models
     {
         void Move();
         void Attack(Chess target);
+        void Kill(Chess target);
     }
 }

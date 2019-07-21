@@ -8,8 +8,8 @@ namespace Underlords
         {
             var level = 1;
             var AntiMage = new AntiMage(level);
-            var Razor = new Razor(level);
-            AntiMage.ReleaseSkill(Razor);
+            var Bloodseeker = new Bloodseeker(level);
+            AntiMage.ReleaseSkill(Bloodseeker);
         }
     }
 }

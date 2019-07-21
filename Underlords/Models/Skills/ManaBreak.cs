@@ -18,7 +18,16 @@ namespace Underlords.Model.Skills
 
         public void BurnMana(Chess target)
         {
-            target.CurrentMana = target.CurrentMana - 30 * SkillLevel;
+            if (target.CurrentMana >= 30 * SkillLevel)
+            {
+                target.CurrentMana = target.CurrentMana - 30 * SkillLevel;
+                target.CurrentHP = target.CurrentHP - 30 * SkillLevel / 2;
+            }
+            else
+            {
+                target.CurrentHP = target.CurrentHP - target.CurrentMana / 2;
+                target.CurrentMana = 0;
+            }
         }
     }
 }
