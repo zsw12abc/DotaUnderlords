@@ -32,19 +32,31 @@ namespace Underlords.Models.ChessBoard
             if (Bench.Count < 8) Bench.Add(hero);
         }
 
-        public void MoveHero(Hero hero, Position position)
+        public void PickHeroFromBench(int index, Position position)
         {
-            if (ChessBoard[position.x, position.y] == null)
+            var hero = Bench[index];
+            hero.Position = position;
+            ChessBoard[position.x, position.y] = hero;
+            Bench[index] = null;
+        }
+
+        public void SwitchHero(Position fromPosition, Position toPosition)
+        {
+            if (ChessBoard[toPosition.x, toPosition.y] == null)
             {
-                hero.Position = position;
-                ChessBoard[position.x, position.y] = hero;
+                var hero = ChessBoard[fromPosition.x, fromPosition.y];
+                hero.Position = toPosition;
+                ChessBoard[fromPosition.x, fromPosition.y] = null;
+                ChessBoard[toPosition.x, toPosition.y] = hero;
             }
             else
             {
-                var heroReplace = ChessBoard[position.x, position.y];
-                heroReplace.Position = hero.Position;
-                ChessBoard[position.x, position.y] = hero;
-                hero.Position = position;
+                var fromHero = ChessBoard[fromPosition.x, fromPosition.y];
+                var toHero = ChessBoard[toPosition.x, toPosition.y];
+                fromHero.Position = toPosition;
+                toHero.Position = fromPosition;
+                ChessBoard[fromPosition.x, fromPosition.y] = toHero;
+                ChessBoard[toPosition.x, toPosition.y] = fromHero;
             }
         }
     }
