@@ -38,6 +38,8 @@ namespace Underlords.Model
                     MaxAttackDamage = 220;
                     break;
             }
+
+            initialize();
         }
 
         public override void ReleaseSkill(Chess target)

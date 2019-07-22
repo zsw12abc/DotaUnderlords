@@ -1,4 +1,5 @@
 ﻿using Underlords.Model;
+using Underlords.Models.ChessBoard;
 
 namespace Underlords
 {
@@ -6,10 +7,10 @@ namespace Underlords
     {
         public static void Main(string[] args)
         {
-            var level = 1;
-            var AntiMage = new AntiMage(level);
-            var Bloodseeker = new Bloodseeker(level);
-            AntiMage.ReleaseSkill(Bloodseeker);
+            var player1 = new Player();
+            player1.BuyHero(new AntiMage(1));
+            player1.BuyHero(new Bloodseeker(1));
+            player1.MoveHero(new AntiMage(1), new Position(1, 1));
         }
     }
 }
