@@ -8,9 +8,9 @@ namespace Underlords.Models.ChessBoard
     public class Player : IPlayer
     {
         public List<Chess> Bench;
-        public Chess[,] ChessBoard;
         public int CurrentExp;
         public int CurrentLife;
+        public Chess[,] Gameboard;
         public int InitialLife;
         public int Level;
         public int Money;
@@ -23,7 +23,7 @@ namespace Underlords.Models.ChessBoard
             Level = 1;
             CurrentExp = 0;
             Money = 0;
-            ChessBoard = new Chess[4, 8];
+            Gameboard = new Chess[4, 8];
             Bench = new List<Chess>();
         }
 
@@ -36,7 +36,7 @@ namespace Underlords.Models.ChessBoard
         public bool Lose()
         {
             var IsLost = true;
-            foreach (var chess in ChessBoard)
+            foreach (var chess in Gameboard)
                 if (chess != null)
                     IsLost = chess.IsDead && IsLost;
             return IsLost;
@@ -51,27 +51,27 @@ namespace Underlords.Models.ChessBoard
         {
             var hero = Bench[index];
             hero.Position = position;
-            ChessBoard[position.x, position.y] = hero;
+            Gameboard[position.x, position.y] = hero;
             Bench[index] = null;
         }
 
         public void SwitchHero(Position fromPosition, Position toPosition)
         {
-            if (ChessBoard[toPosition.x, toPosition.y] == null)
+            if (Gameboard[toPosition.x, toPosition.y] == null)
             {
-                var hero = ChessBoard[fromPosition.x, fromPosition.y];
+                var hero = Gameboard[fromPosition.x, fromPosition.y];
                 hero.Position = toPosition;
-                ChessBoard[fromPosition.x, fromPosition.y] = null;
-                ChessBoard[toPosition.x, toPosition.y] = hero;
+                Gameboard[fromPosition.x, fromPosition.y] = null;
+                Gameboard[toPosition.x, toPosition.y] = hero;
             }
             else
             {
-                var fromHero = ChessBoard[fromPosition.x, fromPosition.y];
-                var toHero = ChessBoard[toPosition.x, toPosition.y];
+                var fromHero = Gameboard[fromPosition.x, fromPosition.y];
+                var toHero = Gameboard[toPosition.x, toPosition.y];
                 fromHero.Position = toPosition;
                 toHero.Position = fromPosition;
-                ChessBoard[fromPosition.x, fromPosition.y] = toHero;
-                ChessBoard[toPosition.x, toPosition.y] = fromHero;
+                Gameboard[fromPosition.x, fromPosition.y] = toHero;
+                Gameboard[toPosition.x, toPosition.y] = fromHero;
             }
         }
     }

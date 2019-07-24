@@ -39,6 +39,7 @@ namespace Underlords.Models
         public bool IsStunned { get; set; }
         public bool IsHexed { get; set; }
         public bool IsDead { get; set; }
+        public bool IsEnemy { get; set; } = false;
         public Chess KilledBy { get; set; }
 
         public virtual void Move()
