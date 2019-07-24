@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Underlords.Model;
 using Underlords.Model.Races;
 
 namespace Underlords.Models.ChessBoard
 {
-    public class Player
+    public class Player : IPlayer
     {
         public List<Chess> Bench;
         public Chess[,] ChessBoard;
@@ -22,7 +23,7 @@ namespace Underlords.Models.ChessBoard
             Level = 1;
             CurrentExp = 0;
             Money = 0;
-            ChessBoard = new Chess[8, 8];
+            ChessBoard = new Chess[4, 8];
             Bench = new List<Chess>();
         }
 
@@ -30,6 +31,20 @@ namespace Underlords.Models.ChessBoard
         public void BuyHero(Hero hero)
         {
             if (Bench.Count < 8) Bench.Add(hero);
+        }
+
+        public bool Lose()
+        {
+            var IsLost = true;
+            foreach (var chess in ChessBoard)
+                if (chess != null)
+                    IsLost = chess.IsDead && IsLost;
+            return IsLost;
+        }
+
+        public void Fight(Player enemy)
+        {
+            throw new NotImplementedException();
         }
 
         public void PickHeroFromBench(int index, Position position)

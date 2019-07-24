@@ -38,6 +38,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+      <Compile Include="Models\ChessBoard\IPlayer.cs"/>
+      <Compile Include="Models\ChessBoard\IPosition.cs"/>
       <Compile Include="Models\ChessBoard\Player.cs"/>
       <Compile Include="Models\ChessBoard\Position.cs"/>
       <Compile Include="Models\Chess.cs"/>
