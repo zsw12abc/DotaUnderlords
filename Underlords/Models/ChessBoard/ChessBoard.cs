@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Underlords.Model;
 
 namespace Underlords.Models.ChessBoard
@@ -10,8 +11,8 @@ namespace Underlords.Models.ChessBoard
         private readonly Player defender;
         private readonly Chess[,] Gameboard;
         private readonly List<Hero> Level1Heros = new List<Hero>();
+        public readonly List<Hero> Shop;
         private int roundLevel;
-        private readonly List<Hero> Shop;
 
         public ChessBoard(Player defender, Player attacker)
         {
@@ -53,7 +54,10 @@ namespace Underlords.Models.ChessBoard
                 Shop.Add(hero);
                 Console.WriteLine($"Add No.{i} Hero {hero.Name} to Shop");
             }
+
+            DisplayShop(Shop);
         }
+
 
         public void Play()
         {
@@ -67,6 +71,14 @@ namespace Underlords.Models.ChessBoard
         public void BattleSettlement()
         {
             throw new NotImplementedException();
+        }
+
+        private void DisplayShop(List<Hero> shop)
+        {
+            var DisplayShop = new StringBuilder();
+            for (var i = 0; i < shop.Count; i++) DisplayShop.AppendLine($"Sort: {i}, {shop[i].Name}");
+
+            Console.WriteLine(DisplayShop.ToString());
         }
 
         private void InitializeShop()

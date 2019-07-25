@@ -28,51 +28,59 @@ namespace Underlords.Models.ChessBoard
         }
 
 
-        public void BuyHero(Hero hero)
+        public void BuyHero(int index, List<Hero> Shop)
         {
-            if (Bench.Count < 8) Bench.Add(hero);
-        }
-
-        public bool Lose()
-        {
-            var IsLost = true;
-            foreach (var chess in Gameboard)
-                if (chess != null)
-                    IsLost = chess.IsDead && IsLost;
-            return IsLost;
-        }
-
-        public void Fight(Player enemy)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void PickHeroFromBench(int index, Position position)
-        {
-            var hero = Bench[index];
-            hero.Position = position;
-            Gameboard[position.x, position.y] = hero;
-            Bench[index] = null;
-        }
-
-        public void SwitchHero(Position fromPosition, Position toPosition)
-        {
-            if (Gameboard[toPosition.x, toPosition.y] == null)
+            if (Shop[index] != null)
             {
-                var hero = Gameboard[fromPosition.x, fromPosition.y];
-                hero.Position = toPosition;
-                Gameboard[fromPosition.x, fromPosition.y] = null;
-                Gameboard[toPosition.x, toPosition.y] = hero;
+                if (Bench.Count < 8) Bench.Add(Shop[index]);
+                Console.WriteLine($"Buy Sort {index} {Shop[index].Name}");
+                Shop[index] = null;
+                else
+                {
+                    Console.WriteLine($"This Sort {index} is null");
+                }
             }
-            else
+
+            bool Lose()
             {
-                var fromHero = Gameboard[fromPosition.x, fromPosition.y];
-                var toHero = Gameboard[toPosition.x, toPosition.y];
-                fromHero.Position = toPosition;
-                toHero.Position = fromPosition;
-                Gameboard[fromPosition.x, fromPosition.y] = toHero;
-                Gameboard[toPosition.x, toPosition.y] = fromHero;
+                var IsLost = true;
+                foreach (var chess in Gameboard)
+                    if (chess != null)
+                        IsLost = chess.IsDead && IsLost;
+                return IsLost;
+            }
+
+            void Fight(Player enemy)
+            {
+                throw new NotImplementedException();
+            }
+
+            void PickHeroFromBench(int index, Position position)
+            {
+                var hero = Bench[index];
+                hero.Position = position;
+                Gameboard[position.x, position.y] = hero;
+                Bench[index] = null;
+            }
+
+            void SwitchHero(Position fromPosition, Position toPosition)
+            {
+                if (Gameboard[toPosition.x, toPosition.y] == null)
+                {
+                    var hero = Gameboard[fromPosition.x, fromPosition.y];
+                    hero.Position = toPosition;
+                    Gameboard[fromPosition.x, fromPosition.y] = null;
+                    Gameboard[toPosition.x, toPosition.y] = hero;
+                }
+                else
+                {
+                    var fromHero = Gameboard[fromPosition.x, fromPosition.y];
+                    var toHero = Gameboard[toPosition.x, toPosition.y];
+                    fromHero.Position = toPosition;
+                    toHero.Position = fromPosition;
+                    Gameboard[fromPosition.x, fromPosition.y] = toHero;
+                    Gameboard[toPosition.x, toPosition.y] = fromHero;
+                }
             }
         }
     }
-}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Underlords.Model;
 
 namespace Underlords.Models.ChessBoard
@@ -6,7 +7,7 @@ namespace Underlords.Models.ChessBoard
     {
         void SwitchHero(Position fromPosition, Position toPosition);
         void PickHeroFromBench(int index, Position position);
-        void BuyHero(Hero hero);
+        void BuyHero(int index, List<Hero> Shop);
         bool Lose();
         void Fight(Player enemy);
     }
