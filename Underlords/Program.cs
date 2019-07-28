@@ -18,8 +18,8 @@ namespace Underlords
 //            player1.BuyHero(1, chessBoard.Shop);
 //            player1.BuyHero(2, chessBoard.Shop);
 //            player1.BuyHero(1, chessBoard.Shop);
-            player1.Bench.Add(new AntiMage(1));
-            player1.Bench.Add(new Axe(1));
+            player1.Bench.Add(CreateHeroByName("AntiMage"));
+            player1.Bench.Add(CreateHeroByName("Axe"));
             player1.DisplayBench();
             player1.PickHeroFromBench(0, new Position(0, 1));
             player1.PickHeroFromBench(1, new Position(0, 2));
@@ -29,8 +29,8 @@ namespace Underlords
 //            chessBoard.ShoppingTime(1);
 //            player2.BuyHero(3, chessBoard.Shop);
 //            player2.BuyHero(4, chessBoard.Shop);
-            player2.Bench.Add(new Bloodseeker(1));
-            player2.Bench.Add(new Razor(1));
+            player2.Bench.Add(CreateHeroByName("Bloodseeker"));
+            player2.Bench.Add(CreateHeroByName("Razor"));
             player2.DisplayBench();
             player2.PickHeroFromBench(0, new Position(3, 4));
             player2.PickHeroFromBench(1, new Position(2, 6));
@@ -41,8 +41,23 @@ namespace Underlords
             var chessBoard = new ChessBoard(player1, player2);
             chessBoard.Load();
             chessBoard.Play();
-//            player2.BuyHero(new Bloodseeker(1));
-//            player2.PickHeroFromBench(0, new Position(0, 1));
+        }
+
+        private static Hero CreateHeroByName(string heroName, int level = 1)
+        {
+            switch (heroName)
+            {
+                case "Axe":
+                    return new Axe(level);
+                case "AntiMage":
+                    return new AntiMage(level);
+                case "Bloodseeker":
+                    return new Bloodseeker(level);
+                case "Razor":
+                    return new Razor(level);
+                default:
+                    return null;
+            }
         }
     }
 }

@@ -29,23 +29,20 @@ namespace Underlords.Models.ChessBoard
             foreach (var chess in defender.PlayerBoard)
                 if (chess != null)
                 {
-                    var copyChess = (Chess) chess.Clone();
-                    copyChess.Position.x += 4;
-                    Gameboard[chess.Position.x, chess.Position.y] = copyChess;
-                    copyChess.IsEnemy = false;
+                    chess.Position.x += 4;
+                    Gameboard[chess.Position.x, chess.Position.y] = chess;
+                    chess.IsEnemy = false;
                     Console.WriteLine(
-                        $"Chess {chess.Name} has been set to Position [{copyChess.Position.x},{copyChess.Position.y}], which IsEnemy is {copyChess.IsEnemy}");
+                        $"Chess {chess.Name} has been set to Position [{chess.Position.x},{chess.Position.y}], which IsEnemy is {chess.IsEnemy}");
                 }
 
             foreach (var chess in attacker.PlayerBoard)
                 if (chess != null)
                 {
-                    var copyChess = (Chess) chess.Clone();
-                    copyChess.Position.x = 4 - chess.Position.x;
-                    copyChess.Position.y = 7 - chess.Position.y;
-                    copyChess.IsEnemy = true;
-//                    chess.Position = new Position(copyChess.Position.x, copyChess.Position.y);
-                    Gameboard[chess.Position.x, chess.Position.y] = copyChess;
+                    chess.Position.x = 3 - chess.Position.x;
+                    chess.Position.y = 7 - chess.Position.y;
+                    chess.IsEnemy = true;
+                    Gameboard[chess.Position.x, chess.Position.y] = chess;
                     Console.WriteLine(
                         $"Chess {chess.Name} has been set to Position [{chess.Position.x},{chess.Position.y}], which IsEnemy is {chess.IsEnemy}");
                 }
@@ -70,7 +67,7 @@ namespace Underlords.Models.ChessBoard
 
         public void Play()
         {
-            while (defender.Lose() || attacker.Lose()) FindEnemy(defender, attacker);
+            while (!defender.Lose() || !attacker.Lose()) FindEnemy(defender, attacker);
         }
 
 
