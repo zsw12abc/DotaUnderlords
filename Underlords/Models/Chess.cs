@@ -3,7 +3,7 @@ using Underlords.Models.ChessBoard;
 
 namespace Underlords.Models
 {
-    public class Chess : IChess
+    public class Chess : IChess, ICloneable
     {
         public Chess()
         {
@@ -41,6 +41,7 @@ namespace Underlords.Models
         public bool IsDead { get; set; }
         public bool IsEnemy { get; set; } = false;
         public Chess KilledBy { get; set; }
+        public Chess Target { get; set; }
 
         public virtual void Move()
         {
@@ -61,6 +62,11 @@ namespace Underlords.Models
         {
             target.IsDead = true;
             target.KilledBy = target;
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
 
         public void initialize()

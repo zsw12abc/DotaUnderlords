@@ -26,29 +26,38 @@ namespace Underlords.Models.ChessBoard
 
         public void Load()
         {
-            foreach (var chess in defender.Gameboard)
+            foreach (var chess in defender.PlayerBoard)
                 if (chess != null)
                 {
-                    Gameboard[chess.Position.x, chess.Position.y] = chess;
+                    var copyChess = (Chess) chess.Clone();
+                    copyChess.Position.x += 4;
+                    Gameboard[chess.Position.x, chess.Position.y] = copyChess;
+                    copyChess.IsEnemy = false;
+                    Console.WriteLine(
+                        $"Chess {chess.Name} has been set to Position [{copyChess.Position.x},{copyChess.Position.y}], which IsEnemy is {copyChess.IsEnemy}");
+                }
+
+            foreach (var chess in attacker.PlayerBoard)
+                if (chess != null)
+                {
+                    var copyChess = (Chess) chess.Clone();
+                    copyChess.Position.x = 4 - chess.Position.x;
+                    copyChess.Position.y = 7 - chess.Position.y;
+                    copyChess.IsEnemy = true;
+//                    chess.Position = new Position(copyChess.Position.x, copyChess.Position.y);
+                    Gameboard[chess.Position.x, chess.Position.y] = copyChess;
                     Console.WriteLine(
                         $"Chess {chess.Name} has been set to Position [{chess.Position.x},{chess.Position.y}], which IsEnemy is {chess.IsEnemy}");
                 }
 
-            foreach (var chess in attacker.Gameboard)
-                if (chess != null)
-                {
-                    chess.IsEnemy = true;
-                    chess.Position = new Position(7 - chess.Position.x, 7 - chess.Position.y);
-                    Gameboard[chess.Position.x, chess.Position.y] = chess;
-                    Console.WriteLine(
-                        $"Chess {chess.Name} has been set to Position [{chess.Position.x},{chess.Position.y}], which IsEnemy is {chess.IsEnemy}");
-                }
+            DisplayGameBoard();
         }
 
         public void ShoppingTime(int roundLevel)
         {
+            Shop.Clear();
             var random = new Random();
-            for (var i = 0; i < 6; i++)
+            for (var i = 0; i < 5; i++)
             {
                 var hero = Level1Heros[random.Next(0, 3)];
                 Shop.Add(hero);
@@ -61,22 +70,88 @@ namespace Underlords.Models.ChessBoard
 
         public void Play()
         {
-            while (defender.Lose() || attacker.Lose())
-            {
-            }
-
-            throw new NotImplementedException();
+            while (defender.Lose() || attacker.Lose()) FindEnemy(defender, attacker);
         }
+
 
         public void BattleSettlement()
         {
             throw new NotImplementedException();
         }
 
+        private void DisplayGameBoard()
+        {
+            var len = 0;
+            var gameBoard = new StringBuilder();
+            foreach (var chess in Gameboard)
+            {
+                len++;
+                if (chess == null)
+                {
+                    gameBoard.Append("O");
+                }
+                else
+                {
+                    if (chess.IsEnemy)
+                        gameBoard.Append("*");
+                    else
+                        gameBoard.Append("x");
+                }
+
+                if (len == 8)
+                {
+                    len = 0;
+                    gameBoard.AppendLine();
+                }
+            }
+
+            Console.WriteLine(gameBoard.ToString());
+        }
+
+        private void FindEnemy(Player defender, Player attacker)
+        {
+            foreach (var chess in Gameboard)
+                if (chess != null)
+                {
+                    if (!chess.IsEnemy)
+                    {
+                        var minDistance = 10;
+                        foreach (var attackerChess in attacker.PlayerBoard)
+                            if (attackerChess != null)
+                            {
+                                var distance = GetDistance(chess.Position, attackerChess.Position);
+                                if (minDistance > distance)
+                                {
+                                    minDistance = distance;
+                                    chess.Target = attackerChess;
+                                    Console.WriteLine(
+                                        $"Defender {chess.Name} located at ({chess.Position.x}, {chess.Position.y}) found enemy, which is {attackerChess.Name} located at ({attackerChess.Position.x},{attackerChess.Position.y})");
+                                }
+                            }
+                    }
+                    else
+                    {
+                        var minDistance = 10;
+                        foreach (var defenderChess in defender.PlayerBoard)
+                            if (defenderChess != null)
+                            {
+                                var distance = GetDistance(chess.Position, defenderChess.Position);
+                                if (minDistance > distance)
+                                {
+                                    minDistance = distance;
+                                    chess.Target = defenderChess;
+                                    Console.WriteLine(
+                                        $"Attacker {chess.Name} located at ({chess.Position.x}, {chess.Position.y}) found enemy, which is {defenderChess.Name} located at ({defenderChess.Position.x},{defenderChess.Position.y})");
+                                }
+                            }
+                    }
+                }
+        }
+
         private void DisplayShop(List<Hero> shop)
         {
             var DisplayShop = new StringBuilder();
-            for (var i = 0; i < shop.Count; i++) DisplayShop.AppendLine($"Sort: {i}, {shop[i].Name}");
+            for (var i = 0; i < shop.Count; i++) DisplayShop.AppendLine($"Shop Slot: {i}, {shop[i].Name}");
 
             Console.WriteLine(DisplayShop.ToString());
         }
@@ -86,6 +161,13 @@ namespace Underlords.Models.ChessBoard
             Level1Heros.Add(new Axe(1));
             Level1Heros.Add(new Bloodseeker(1));
             Level1Heros.Add(new AntiMage(1));
+        }
+
+        private int GetDistance(Position position1, Position position2)
+        {
+            var xDistance = Math.Abs(position2.x - position1.x);
+            var yDistance = Math.Abs(position2.y - position2.y);
+            return xDistance > yDistance ? xDistance : yDistance;
         }
     }
 

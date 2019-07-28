@@ -10,12 +10,5 @@ namespace Underlords.Models.ChessBoard
             this.x = x;
             this.y = y;
         }
-
-        public int GetDistance(Position position2)
-        {
-            var xDistance = position2.x - x;
-            var yDistance = position2.y - y;
-            return xDistance > yDistance ? xDistance : yDistance;
-        }
     }
 }
