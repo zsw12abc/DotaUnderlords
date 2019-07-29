@@ -67,7 +67,10 @@ namespace Underlords.Models.ChessBoard
 
         public void Play()
         {
-            while (!defender.Lose() || !attacker.Lose()) FindEnemy(defender, attacker);
+            while (!defender.Lose() || !attacker.Lose())
+            {
+                FindEnemy(defender, attacker);
+            }
         }
 
 
@@ -108,28 +111,43 @@ namespace Underlords.Models.ChessBoard
         private void FindEnemy(Player defender, Player attacker)
         {
             foreach (var chess in Gameboard)
+            {
                 if (chess != null)
                 {
                     if (!chess.IsEnemy)
                     {
                         var minDistance = 10;
+                        Chess targetEnemy = null;
                         foreach (var attackerChess in attacker.PlayerBoard)
+                        {
                             if (attackerChess != null)
                             {
                                 var distance = GetDistance(chess.Position, attackerChess.Position);
                                 if (minDistance > distance)
                                 {
                                     minDistance = distance;
-                                    chess.Target = attackerChess;
+                                    targetEnemy = attackerChess;
                                     Console.WriteLine(
                                         $"Defender {chess.Name} located at ({chess.Position.x}, {chess.Position.y}) found enemy, which is {attackerChess.Name} located at ({attackerChess.Position.x},{attackerChess.Position.y})");
                                 }
                             }
+                        }
+
+                        if (chess.AttackRange >= minDistance && targetEnemy != null)
+                        {
+                            ChessBattle(chess, targetEnemy);
+                        }
+
+                        if (chess.AttackRange < minDistance && targetEnemy != null)
+                        {
+                            ChessMove(chess, targetEnemy);
+                        }
                     }
                     else
                     {
                         var minDistance = 10;
                         foreach (var defenderChess in defender.PlayerBoard)
+                        {
                             if (defenderChess != null)
                             {
                                 var distance = GetDistance(chess.Position, defenderChess.Position);
@@ -141,8 +159,37 @@ namespace Underlords.Models.ChessBoard
                                         $"Attacker {chess.Name} located at ({chess.Position.x}, {chess.Position.y}) found enemy, which is {defenderChess.Name} located at ({defenderChess.Position.x},{defenderChess.Position.y})");
                                 }
                             }
+                        }
                     }
                 }
+            }
+        }
+
+        public void ChessMove(Chess chess, Chess targetEnemy)
+        {
+            var xDistance = chess.Position.x - targetEnemy.Position.x;
+            var yDistance = chess.Position.y - targetEnemy.Position.y;
+            var xDirection = xDistance >= 0 ? 1 : -1;
+            var yDirection = yDistance >= 0 ? 1 : -1;
+            Position nextMovement;
+            if (Math.Abs(xDistance) > Math.Abs(yDistance))
+            {
+                nextMovement = new Position(chess.Position.x - 1 * xDirection, chess.Position.y);
+            }
+            else
+            {
+                nextMovement = new Position(chess.Position.x, chess.Position.y - 1 * yDirection);
+            }
+        }
+
+        public void ChessBattle(Chess chess, Chess targetEnemy)
+        {
+            var random = new Random();
+            var attackDamage = random.Next(chess.MinAttackDamage, chess.MaxAttackDamage);
+            if (targetEnemy.CurrentHP <= attackDamage)
+                targetEnemy.IsDead = true;
+            else
+                targetEnemy.CurrentHP -= attackDamage;
         }
 
         private void DisplayShop(List<Hero> shop)

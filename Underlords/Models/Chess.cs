@@ -43,9 +43,21 @@ namespace Underlords.Models
         public Chess KilledBy { get; set; }
         public Chess Target { get; set; }
 
-        public virtual void Move()
+        public virtual void Move(Chess target)
         {
-            throw new NotImplementedException();
+            var xDistance = Position.x - target.Position.x;
+            var yDistance = Position.y - target.Position.y;
+            var xDirection = xDistance >= 0 ? 1 : -1;
+            var yDirection = yDistance >= 0 ? 1 : -1;
+            Position nextMovement;
+            if (Math.Abs(xDistance) > Math.Abs(yDistance))
+            {
+                nextMovement = new Position(Position.x - 1 * xDirection, Position.y);
+            }
+            else
+            {
+                nextMovement = new Position(Position.x, Position.y - 1 * yDirection);
+            }
         }
 
         public virtual void Attack(Chess target)
